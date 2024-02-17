@@ -1,0 +1,5 @@
+[core]
+    remote = remotedata
+['remote "remotedata"']
+    url = s3://datadvcsid/data
+    version_aware = true

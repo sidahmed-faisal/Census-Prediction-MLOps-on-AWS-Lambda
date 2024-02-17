@@ -1,0 +1,27 @@
+name: Movies CI/CD
+
+# Triggers for the workflow
+on:
+    # Manual trigger using the workflow_dispatch event
+    workflow_dispatch:
+    
+    # Automatic trigger on push events to the main branch
+    push:
+      branches:
+        - dev
+
+jobs:
+    # Continuous Integration job
+    ci_for_backend:
+        runs-on: ubuntu-latest
+        
+        environment:
+              name: Development
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+  
+            - name: Setup Python
+              uses: actions/setup-python@v5
+              with:
+                python-version: '3.8'

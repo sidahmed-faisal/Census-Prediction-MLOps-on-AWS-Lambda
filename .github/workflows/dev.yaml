@@ -1,4 +1,4 @@
-name: Movies CI/CD
+name: Census Development Environment
 
 # Triggers for the workflow
 on:
@@ -8,7 +8,7 @@ on:
     # Automatic trigger on push events to the main branch
     push:
       branches:
-        - dev
+        - main
 
 jobs:
     # Continuous Integration job

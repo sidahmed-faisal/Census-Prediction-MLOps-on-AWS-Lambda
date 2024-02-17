@@ -12,7 +12,7 @@ on:
 
 jobs:
     # Continuous Integration job
-    ci_for_Dev:
+    ci_for_Prod:
         runs-on: ubuntu-latest
         
  

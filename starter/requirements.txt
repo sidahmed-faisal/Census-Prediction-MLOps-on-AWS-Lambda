@@ -1,9 +1,14 @@
-python==3.8
 numpy
 pandas
 scikit-learn
 pytest
+flake8
 requests
 fastapi==0.63.0
 uvicorn
 gunicorn
+mangum
+pyrootutils
+httpx
+dvc
+dvc[s3]

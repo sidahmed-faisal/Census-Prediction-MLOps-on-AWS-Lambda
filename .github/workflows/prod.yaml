@@ -9,6 +9,9 @@ on:
     push:
       branches:
         - main
+defaults:
+    run:
+        working-directory: ./starter
 
 jobs:
     # Continuous Integration job
@@ -24,3 +27,9 @@ jobs:
               uses: actions/setup-python@v5
               with:
                 python-version: '3.8'
+
+            - name: Install dependencies
+              run: |
+                pip install -r requirments.txt
+
+            

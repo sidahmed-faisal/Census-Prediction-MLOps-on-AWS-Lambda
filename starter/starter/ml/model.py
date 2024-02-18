@@ -1,5 +1,5 @@
 from sklearn.metrics import fbeta_score, precision_score, recall_score
-
+import xgboost as xgb
 
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
@@ -17,8 +17,12 @@ def train_model(X_train, y_train):
     model
         Trained machine learning model.
     """
+    #Creating an XGBoost classifier
+    model = xbg.XGBClassifier()
 
-    pass
+    #Training the model on the training data
+    model.fit(X_train, y_train)
+    
 
 
 def compute_model_metrics(y, preds):

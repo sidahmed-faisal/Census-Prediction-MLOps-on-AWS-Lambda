@@ -22,6 +22,8 @@ def train_model(X_train, y_train):
 
     #Training the model on the training data
     model.fit(X_train, y_train)
+
+    return model
     
 
 
@@ -61,4 +63,9 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    pass
+
+    #Making predictions on the test set
+    predictions = model.predict(X)
+
+    return predictions
+    

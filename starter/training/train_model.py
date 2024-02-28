@@ -42,16 +42,30 @@ X_train, y_train, encoder, lb = process_data(
 # Proces the test data with the process_data function.
 X_test, y_test, _, _ = process_data(test, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb)
 
-# Train and save a model.
-logging.info("Started Trainning data")
-lgbm_model = train_model(X_train, y_train)
-logging.info(f"SUCCESS: Model Trainning Finsihes for {lgbm_model}")
+# Check if a trained model already exists
+model_path = "../model"
+if os.path.isfile(os.path.join(model_path,"model.pkl")):
+    logging.info(f"Loading model from {model_path}/")
+    lgbm_model = pickle.load(open(os.path.join(model_path,"model.pkl"), 'rb'))
+    encoder = pickle.load(open(os.path.join(model_path,"encoder.pkl"), 'rb'))
+    lb = pickle.load(open(os.path.join(model_path,"lb.pkl"), 'rb'))
+    logging.info(f"SUCCESS: Loaded model from {model_path}/")
+else:
+    logging.info(f"Model wasn't found in {model_path}/")
+    # Train and save a model.
+    logging.info("Started Trainning data")
+    lgbm_model = train_model(X_train, y_train)
+    logging.info(f"SUCCESS: Model Trainning Finsihes for {lgbm_model}")
+    pickle.dump(lgbm_model, open(os.path.join(model_path,"model.pkl"), 'wb'))
+    pickle.dump(encoder, open(os.path.join(model_path,"encoder.pkl"), 'wb'))
+    pickle.dump(lb, open(os.path.join(model_path,"lb.pkl"), 'wb'))
+    logging.info(f"SUCCESS: Saved model to {model_path}/")
 
 # Evaluate the model
 y_preds = inference(lgbm_model, X_test)
 precision, recall, fbeta = compute_model_metrics(y_test, y_preds)
 print("Precision: ", precision, " recall: ", recall, " fbeta: ", fbeta)
 
-for value in data["education"].unique():
-    print(value)
+# for value in data["education"].unique():
+#     print(value)
 

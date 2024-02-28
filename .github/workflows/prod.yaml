@@ -55,6 +55,10 @@ jobs:
                   docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
                   docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
             
+            - name: Pull data from DVC
+              run: |
+                  dvc pull
+            
             - name: Update Lambda function with the latest Docker image for production
               env:
                 ECR_REGISTRY: ${{ steps.ecr.outputs.registry }}

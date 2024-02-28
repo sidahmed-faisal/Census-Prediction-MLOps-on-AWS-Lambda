@@ -1,5 +1,10 @@
 from sklearn.metrics import fbeta_score, precision_score, recall_score
-import lightgbm as lgb
+# import lightgbm as lgb
+from sklearn.model_selection import RandomizedSearchCV
+import scipy.stats as stats
+
+from xgboost import XGBClassifier 
+
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
     """
@@ -16,11 +21,26 @@ def train_model(X_train, y_train):
     model
         Trained machine learning model.
     """
-    #Creating an XGBoost classifier
-    model = lgb.LGBMClassifier(learning_rate=0.01,max_depth=-5,random_state=42)
+    # Define the hyperparameter distributions
+    param_dist = {
+        'max_depth': stats.randint(3, 10),
+        'learning_rate': stats.uniform(0.01, 0.1),
+        'subsample': stats.uniform(0.5, 0.5),
+        'n_estimators':stats.randint(50, 200)
+    }
 
-    #Training the model on the training data
-    model.fit(X_train, y_train,eval_metric='logloss')
+    # Create the XGBoost model object
+    xgb_model = XGBClassifier()
+
+    # Create the RandomizedSearchCV object
+    model = RandomizedSearchCV(xgb_model, param_distributions=param_dist, n_iter=10, cv=5, scoring='accuracy')
+
+    # Fit the GridSearchCV object to the training data
+    model.fit(X_train, y_train)
+
+    # Print the best set of hyperparameters and the corresponding score
+    print("Best set of hyperparameters: ", model.best_params_)
+    print("Best score: ", model.best_score_)
 
     return model
     

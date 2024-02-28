@@ -11,7 +11,7 @@ on:
         - main
 defaults:
     run:
-        working-directory: ./starter
+        working-directory: ./
 
 jobs:
     # Continuous Integration job

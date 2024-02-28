@@ -58,6 +58,7 @@ jobs:
             - name: Update Lambda function with the latest Docker image for production
               env:
                 ECR_REGISTRY: ${{ steps.ecr.outputs.registry }}
+                ECR_REPOSITORY: ${{secrets.ECR_REPOSITORY}}
               run: |
                   aws lambda update-function-code --function-name census --image-uri $ECR_REGISTRY/$ECR_REPOSITORY:latest
                   

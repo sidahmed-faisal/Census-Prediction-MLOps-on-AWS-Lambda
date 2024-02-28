@@ -11,7 +11,7 @@ on:
         - main
 defaults:
     run:
-        working-directory: ./
+        working-directory: ../
 
 jobs:
     # Continuous Integration job
@@ -31,5 +31,33 @@ jobs:
             - name: Install dependencies
               run: |
                 pip install -r requirements.txt
-
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v3
+              with:
+                  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  aws-region: us-east-1
+            - name:  Login to Amazon ECR
+              id: ecr
+              uses: aws-actions/amazon-ecr-login@v2
+        
+            - name: Login to Docker Hub
+              uses: docker/login-action@v3
+              with:
+                username: ${{ secrets.DOCKERHUB_USERNAME }}
+                password: ${{ secrets.DOCKERHUB_TOKEN }}
+        
+            - name: Build the docker image
+              env:
+                ECR_REGISTRY: ${{ steps.ecr.outputs.registry }}
+                ECR_REPOSITORY: ${{secrets.ECR_REPOSITORY}}
+              run: |
+                  docker build -t ECR_REGISTRY/ECR_REPOSITORY:latest .
+                  docker push ECR_REGISTRY/ECR_REPOSITORY:latest
             
+            - name: Update Lambda function with the latest Docker image for production
+              env:
+                ECR_REGISTRY: ${{ steps.ecr.outputs.registry }}
+              run: |
+                  aws lambda update-function-code --function-name census --image-uri $ECR_REGISTRY/$ECR_REPOSITORY:latest
+                  

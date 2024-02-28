@@ -37,6 +37,10 @@ jobs:
                   aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
                   aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                   aws-region: us-east-1
+
+            - name: Pull data from DVC
+              run: |
+                  dvc pull    
             - name:  Login to Amazon ECR
               id: ecr
               uses: aws-actions/amazon-ecr-login@v2
@@ -55,9 +59,7 @@ jobs:
                   docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
                   docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
             
-            - name: Pull data from DVC
-              run: |
-                  dvc pull
+
             
             - name: Update Lambda function with the latest Docker image for production
               env:

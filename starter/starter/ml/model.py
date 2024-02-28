@@ -1,6 +1,5 @@
 from sklearn.metrics import fbeta_score, precision_score, recall_score
-import xgboost as xgb
-
+import lightgbm as lgb
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
     """
@@ -18,10 +17,10 @@ def train_model(X_train, y_train):
         Trained machine learning model.
     """
     #Creating an XGBoost classifier
-    model = xbg.XGBClassifier()
+    model = lgb.LGBMClassifier(learning_rate=0.01,max_depth=-5,random_state=42)
 
     #Training the model on the training data
-    model.fit(X_train, y_train)
+    model.fit(X_train, y_train,eval_metric='logloss')
 
     return model
     

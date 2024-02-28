@@ -1,0 +1,9 @@
+outs:
+- md5: 13b5f75701841834cf8eaab5198d63fd
+  size: 3328202
+  hash: md5
+  path: census_cleaned.csv
+  cloud:
+    remotedata:
+      etag: 13b5f75701841834cf8eaab5198d63fd
+      version_id: aSdfFMYz_ntbiM6OGwa599GEgXzq6G78

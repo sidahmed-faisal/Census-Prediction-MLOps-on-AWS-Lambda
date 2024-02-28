@@ -1,0 +1,9 @@
+outs:
+- md5: a5e1b5de2d2099ee9bacc087b765d0f7
+  size: 352560
+  hash: md5
+  path: model.pkl
+  cloud:
+    remotedata:
+      etag: a5e1b5de2d2099ee9bacc087b765d0f7
+      version_id: jJkC5ra9gmxseALLkXhP1YxX.6X_ieH.

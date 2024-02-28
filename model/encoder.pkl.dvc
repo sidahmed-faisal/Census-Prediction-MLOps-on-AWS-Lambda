@@ -1,0 +1,9 @@
+outs:
+- md5: ed788d06bfcbe540f49f99d32be1c5b6
+  size: 1979
+  hash: md5
+  path: encoder.pkl
+  cloud:
+    remotedata:
+      etag: ed788d06bfcbe540f49f99d32be1c5b6
+      version_id: r0dFFJiWiokACsPGHGVa8vwfpXocrEzb

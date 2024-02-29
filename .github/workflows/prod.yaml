@@ -9,6 +9,14 @@ on:
     push:
       branches:
         - main
+
+    # Trigger on pull requests closed event on the main branch
+    pull_request:
+      types:
+        - closed
+      branches:
+        - main
+        
 # defaults:
 #     run:
 #         working-directory: ../
@@ -46,7 +54,7 @@ jobs:
             - name: Testing with Pytest
               run: |
                   pytest -vv
-                  
+
             - name:  Login to Amazon ECR
               id: ecr
               uses: aws-actions/amazon-ecr-login@v2

@@ -106,7 +106,7 @@ async def prediction(census_data: InputData):
         prediction = '>50K'
     else:
         prediction = '<=50K', 
-    data['prediction'] ="this person earns "+ " "+ str(prediction)
+    data['prediction'] = "this person earns " + " " + str(prediction)
 
     # return response
     return data

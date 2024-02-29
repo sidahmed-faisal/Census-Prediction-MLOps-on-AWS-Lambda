@@ -4,7 +4,8 @@ This Project builds and trains a machine learning project to predict individuals
 ![Infrastructure-Diagram](/screenshots/Lambda%20MLops.png)
 
 ### Lambda function deployment
+* Endpoint
 ```
-endpoint: https://zcodljp6wn4anehvint7oxvtda0qabvz.lambda-url.us-east-1.on.aws/predict
+https://zcodljp6wn4anehvint7oxvtda0qabvz.lambda-url.us-east-1.on.aws/predict
 ```
 ![Deployment](/screenshots/lambda_function.png)

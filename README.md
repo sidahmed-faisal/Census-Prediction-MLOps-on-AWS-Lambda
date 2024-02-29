@@ -2,3 +2,9 @@
 This Project builds and trains a machine learning project to predict individuals income based on census data from paper: https://arxiv.org/pdf/1810.03993.pdf and configures a dvc registry to keep track of models and data versions and sets up a full CI/CD pipline to push a docker image to dockerhub incase of development purpose and to Amazon ECR based on production environment Github action then automate the process of deploying a FastAPi application to lambda function whenever a new changes created for production.
 ## Diagram of the Infrastructure
 ![Infrastructure-Diagram](/screenshots/Lambda%20MLops.png)
+
+### Lambda function deployment
+```
+endpoint: https://zcodljp6wn4anehvint7oxvtda0qabvz.lambda-url.us-east-1.on.aws/predict
+```
+![Deployment](/screenshots/lambda_function.png)

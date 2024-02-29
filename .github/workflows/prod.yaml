@@ -32,10 +32,6 @@ jobs:
               run: |
                 pip install -r requirements.txt
 
-            - name: Testing with Pytest
-              run: |
-                pytest -vv
-
             - name: Configure AWS credentials
               uses: aws-actions/configure-aws-credentials@v3
               with:
@@ -46,6 +42,11 @@ jobs:
             - name: Pull data from DVC
               run: |
                   dvc pull    
+
+            - name: Testing with Pytest
+              run: |
+                  pytest -vv
+                  
             - name:  Login to Amazon ECR
               id: ecr
               uses: aws-actions/amazon-ecr-login@v2

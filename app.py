@@ -25,6 +25,8 @@ logging.basicConfig(filename='training.log',
 app = FastAPI(title="Census Prediction API",
                 description="This is an API to make inference on the machine learning model",
                 version="1.0.0")
+
+# Define handler for lambda function
 handler = Mangum(app)
 
 model_path = "./model/model.pkl"
@@ -106,9 +108,9 @@ async def prediction(census_data: InputData):
         prediction = '<=50K', 
     data['prediction'] ="this person earns "+ " "+ str(prediction)
 
+    # return response
     return data
 
-
-
+# run the server
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8080)

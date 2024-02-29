@@ -59,8 +59,11 @@ data = pd.read_csv("../data/census_cleaned.csv")
 # Load model
 model = pickle.load(open('../model/model.pkl', 'rb'))
 
+# Load Encoder
 encoder = pickle.load(open('../model/encoder.pkl', 'rb'))
 
+# Load LabelBinarizer
 lb = pickle.load(open('../model/lb.pkl', 'rb'))
 
+# Compute performance slices on education categories
 compute_slices(model=model, encoder=encoder, lb=lb, df=data, categorical_features= cat_features,slice_features=['education'])
